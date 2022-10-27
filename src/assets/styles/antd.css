@@ -17350,6 +17350,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   /* To support leave along ErrorList. We add additional className to handle explain style */
 }
 .ant-form-item-explain-error {
+  font-size: 12px;
   color: #ff4d4f;
 }
 .ant-form-item-explain-warning {

@@ -1,3 +1,17 @@
 body{
     overflow: hidden;
 }
+
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.text-center{
+    text-align: center;
+}
+.text-white{
+    color: #fff;
+}
+
