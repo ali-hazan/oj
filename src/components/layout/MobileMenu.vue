@@ -42,8 +42,7 @@
             <UserOutlined />
           </template>
           <template #title>My Account</template>
-          <a-menu-item key="3">My Wallet</a-menu-item>
-          <a-menu-item key="4">Settings</a-menu-item>
+          <a-menu-item key="3"  @click="router.push({ name: 'wallet' })">My Wallet</a-menu-item>
           <a-menu-item key="5" @click="router.push({ name: 'login' })"
             >Logout</a-menu-item
           >
