@@ -34,7 +34,7 @@
           <template #icon>
             <HomeOutlined />
           </template>
-          <span>Option 1</span>
+          <span>Home</span>
         </a-menu-item>
 
         <a-sub-menu key="2">
@@ -48,6 +48,12 @@
             >Logout</a-menu-item
           >
         </a-sub-menu>
+        <a-menu-item key="6" @click="router.push({ name: 'about' })">
+          <template #icon>
+            <SketchOutlined />
+          </template>
+          <span>About </span>
+        </a-menu-item>
       </a-menu>
     </div>
   </div>
@@ -57,13 +63,11 @@ import { defineComponent, reactive, toRefs, watch } from "vue";
 import LogoImage from "@/components/LogoImage.vue";
 import { useRouter } from "vue-router";
 
-
-
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   HomeOutlined,
-
+  SketchOutlined,
   UserOutlined,
 } from "@ant-design/icons-vue";
 export default defineComponent({
@@ -71,7 +75,7 @@ export default defineComponent({
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     HomeOutlined,
-
+    SketchOutlined,
     LogoImage,
     UserOutlined,
   },
