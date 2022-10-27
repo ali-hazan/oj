@@ -32,43 +32,21 @@
       >
         <a-menu-item key="1">
           <template #icon>
-            <PieChartOutlined />
+            <HomeOutlined />
           </template>
           <span>Option 1</span>
         </a-menu-item>
-        <a-menu-item key="2">
+
+        <a-sub-menu key="2">
           <template #icon>
-            <DesktopOutlined />
+            <UserOutlined />
           </template>
-          <span>Option 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <template #icon>
-            <InboxOutlined />
-          </template>
-          <span>Option 3</span>
-        </a-menu-item>
-        <a-sub-menu key="sub1">
-          <template #icon>
-            <MailOutlined />
-          </template>
-          <template #title>Navigation One</template>
-          <a-menu-item key="5">Option 5</a-menu-item>
-          <a-menu-item key="6">Option 6</a-menu-item>
-          <a-menu-item key="7">Option 7</a-menu-item>
-          <a-menu-item key="8">Option 8</a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <template #icon>
-            <AppstoreOutlined />
-          </template>
-          <template #title>Navigation Two</template>
-          <a-menu-item key="9">Option 9</a-menu-item>
-          <a-menu-item key="10">Option 10</a-menu-item>
-          <a-sub-menu key="sub3" title="Submenu">
-            <a-menu-item key="11">Option 11</a-menu-item>
-            <a-menu-item key="12">Option 12</a-menu-item>
-          </a-sub-menu>
+          <template #title>My Account</template>
+          <a-menu-item key="3">My Wallet</a-menu-item>
+          <a-menu-item key="4">Settings</a-menu-item>
+          <a-menu-item key="5" @click="router.push({ name: 'login' })"
+            >Logout</a-menu-item
+          >
         </a-sub-menu>
       </a-menu>
     </div>
@@ -77,25 +55,25 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, watch } from "vue";
 import LogoImage from "@/components/LogoImage.vue";
+import { useRouter } from "vue-router";
+
+
+
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  PieChartOutlined,
-  MailOutlined,
-  DesktopOutlined,
-  InboxOutlined,
-  AppstoreOutlined,
+  HomeOutlined,
+
+  UserOutlined,
 } from "@ant-design/icons-vue";
 export default defineComponent({
   components: {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    PieChartOutlined,
-    MailOutlined,
-    DesktopOutlined,
-    InboxOutlined,
-    AppstoreOutlined,
+    HomeOutlined,
+
     LogoImage,
+    UserOutlined,
   },
   setup() {
     const state = reactive({
@@ -104,6 +82,7 @@ export default defineComponent({
       openKeys: ["sub1"],
       preOpenKeys: ["sub1"],
     });
+    const router = useRouter();
 
     watch(
       () => state.openKeys,
@@ -119,6 +98,7 @@ export default defineComponent({
     return {
       ...toRefs(state),
       toggleCollapsed,
+      router,
     };
   },
 });
