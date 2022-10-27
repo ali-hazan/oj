@@ -1,7 +1,8 @@
 import { createApp } from "vue";
 import Antd from "ant-design-vue";
 import App from "./App.vue";
-import "ant-design-vue/dist/antd.css";
+import "@/assets/styles/antd.css";
+import "@/assets/styles/custom.css";
 import router from "./router";
 import { createPinia } from "pinia";
 
