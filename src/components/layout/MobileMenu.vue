@@ -43,7 +43,7 @@
           </template>
           <template #title>My Account</template>
           <a-menu-item key="3"  @click="router.push({ name: 'wallet' })">My Wallet</a-menu-item>
-          <a-menu-item key="5" @click="router.push({ name: 'login' })"
+          <a-menu-item key="5" @click="logout"
             >Logout</a-menu-item
           >
         </a-sub-menu>
@@ -61,6 +61,7 @@
 import { defineComponent, reactive, toRefs, watch } from "vue";
 import LogoImage from "@/components/LogoImage.vue";
 import { useRouter } from "vue-router";
+import logoutUser from "@/utils/logout";
 
 import {
   MenuFoldOutlined,
@@ -97,11 +98,16 @@ export default defineComponent({
       state.collapsed = !state.collapsed;
       state.openKeys = state.collapsed ? [] : state.preOpenKeys;
     };
+    const logout =()=>{
+      logoutUser()
+      router.push({ name: 'login' })
+    }
 
     return {
       ...toRefs(state),
       toggleCollapsed,
       router,
+      logout
     };
   },
 });

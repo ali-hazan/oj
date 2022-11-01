@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -37,5 +38,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'login' && localStorage.getItem("token") === null) next({ name: 'login' })
+  else next()
+})
 
 export default router;

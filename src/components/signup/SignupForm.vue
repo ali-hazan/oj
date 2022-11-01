@@ -40,7 +40,9 @@
         </a-form-item>
 
         <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-          <a-button type="primary" html-type="submit">Sign Up</a-button>
+          <a-button type="primary" html-type="submit">
+            <span v-if="callApi">Creating...</span> <span v-else>Sign Up </span>
+          </a-button>
         </a-form-item>
       </a-form>
 
@@ -53,11 +55,13 @@
 
 <script lang="ts" setup>
 import TransparentCard from "../common/TransparentCard.vue";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import type { Rule } from "ant-design-vue/es/form";
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
+import AuthServiceApi from "../../api/auth";
+import Swal from "../../plugins/swal";
 
-const router = useRouter()
+const router = useRouter();
 
 interface FormState {
   username: string;
@@ -81,10 +85,33 @@ const validatePass2 = async (_rule: Rule, value: string) => {
   }
 };
 
+const callApi = ref(false);
+
 const onFinish = (values: any) => {
   console.log("Success:", values);
-  router.push({name:'login'})
-  
+  const data = {
+    username: values.username,
+    password: values.password,
+    password2: values.confirm_password,
+  };
+  callApi.value = true;
+  AuthServiceApi.register(data)
+    .then((res) => {
+      console.log(res.data);
+      router.push({ name: "login" });
+    })
+    .catch((err) => {
+      const errorMsg = Object.values(err.response.data)[0];
+
+      Swal.fire({
+        title: "Error!",
+        text: errorMsg ? errorMsg.toString() : "Something went wrong!",
+        confirmButtonText: "Close",
+      });
+    })
+    .finally(() => {
+      callApi.value = false;
+    });
 };
 
 const onFinishFailed = (errorInfo: any) => {
