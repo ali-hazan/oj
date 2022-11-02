@@ -59,13 +59,5 @@ const purchasePlan = (data: any) => {
   padding: 12px;
   margin: 8px;
 }
-.purchase-btn {
-  background-color: #db4134;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 4px 8px;
-  cursor: pointer;
-  margin: 8px;
-}
+
 </style>

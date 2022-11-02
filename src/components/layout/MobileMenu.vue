@@ -30,7 +30,7 @@
         style="height: 100vh"
         :inline-collapsed="collapsed"
       >
-        <a-menu-item key="1">
+        <a-menu-item key="1" @click="router.push({ name: 'home' })">
           <template #icon>
             <HomeOutlined />
           </template>
@@ -42,10 +42,10 @@
             <UserOutlined />
           </template>
           <template #title>My Account</template>
-          <a-menu-item key="3"  @click="router.push({ name: 'wallet' })">My Wallet</a-menu-item>
-          <a-menu-item key="5" @click="logout"
-            >Logout</a-menu-item
+          <a-menu-item key="3" @click="router.push({ name: 'wallet' })"
+            >My Wallet</a-menu-item
           >
+          <a-menu-item key="5" @click="logout">Logout</a-menu-item>
         </a-sub-menu>
         <a-menu-item key="6" @click="router.push({ name: 'about' })">
           <template #icon>
@@ -98,16 +98,16 @@ export default defineComponent({
       state.collapsed = !state.collapsed;
       state.openKeys = state.collapsed ? [] : state.preOpenKeys;
     };
-    const logout =()=>{
-      logoutUser()
-      router.push({ name: 'login' })
-    }
+    const logout = () => {
+      logoutUser();
+      router.push({ name: "login" });
+    };
 
     return {
       ...toRefs(state),
       toggleCollapsed,
       router,
-      logout
+      logout,
     };
   },
 });

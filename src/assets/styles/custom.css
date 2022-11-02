@@ -14,4 +14,12 @@ body{
 .text-white{
     color: #fff;
 }
-
+.purchase-btn {
+    background-color: #db4134;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    margin: 8px;
+  }
