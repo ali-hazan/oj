@@ -45,6 +45,7 @@
           <a-menu-item key="3" @click="router.push({ name: 'wallet' })"
             >My Wallet</a-menu-item
           >
+          <a-menu-item key="7" @click="router.push({ name: 'my-coupons' })">My Coupons</a-menu-item>
           <a-menu-item key="5" @click="logout">Logout</a-menu-item>
         </a-sub-menu>
         <a-menu-item key="6" @click="router.push({ name: 'about' })">

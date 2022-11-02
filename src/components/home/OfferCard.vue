@@ -20,12 +20,41 @@
 <script setup lang="ts">
 import { toRefs } from "vue";
 import moment from "moment";
+import couponServiceApi from "../../api/coupon";
+import Swal from "@/plugins/swal";
+import { useUserStore } from "../../store";
 
+const userStore = useUserStore();
 // eslint-disable-next-line no-undef
 const props = defineProps(["deal"]);
 const { deal } = toRefs(props);
 const getCoupon = (deal: any) => {
-  console.log(deal);
+  Swal.fire({
+    title: `create ${deal.title} - coupon`,
+    showCancelButton: true,
+    confirmButtonText: "Create",
+    showLoaderOnConfirm: true,
+    preConfirm: () => {
+      return couponServiceApi
+        .create({ deal: deal.id })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data.error)
+          const errorMsg = Object.values(error.response.data.error)[0];
+          Swal.showValidationMessage(`Request failed: ${errorMsg}`);
+        });
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result: any) => {
+    if (result.isConfirmed) {
+      userStore.get();
+      Swal.fire({
+        title: "Created successfully!",
+      });
+    }
+  });
 };
 </script>
 

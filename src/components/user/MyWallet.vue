@@ -20,13 +20,19 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useUserStore } from "../../store";
 import moment from "moment";
+
 
 const userStore = useUserStore();
 
 const user = computed(() => userStore.whoami);
+
+onMounted(() => {
+  userStore.get()
+})
+
 </script>
 
 <style>
