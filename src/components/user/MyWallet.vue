@@ -3,11 +3,22 @@
     <div style="padding: 32px 8px">
       <h2>Wallet</h2>
       <h3>Use your credit point for unlocking offer</h3>
-      <p>Available Credit point 500000 Point</p>
+      <p>Available Credit point {{ user.available_loyality_point}} Point</p>
       <h3>Or Upgrade Your Subscription for more points</h3>
+      <p>Upgrading the plan will result in the loss of your credit points</p>
     </div>
   </div>
 </template>
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useUserStore } from '../../store'
+
+const userStore = useUserStore()
+
+const user = computed(() => userStore.whoami)
+
+</script>
+
 
 <style>
 .appeared-in::before {

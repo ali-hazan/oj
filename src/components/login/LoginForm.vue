@@ -55,6 +55,9 @@ import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import AuthServiceApi from "../../api/auth";
 import Swal from "../../plugins/swal";
+import { useUserStore } from "../../store";
+
+const userStore = useUserStore();
 
 const router = useRouter();
 
@@ -75,6 +78,9 @@ const onFinish = (values: any) => {
   AuthServiceApi.login(values)
     .then((res) => {
       localStorage.setItem("token", res.data.access);
+
+      userStore.get();
+
       router.push({ name: "home" });
     })
     .catch((err) => {

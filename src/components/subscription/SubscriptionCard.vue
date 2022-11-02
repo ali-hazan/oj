@@ -14,7 +14,12 @@
 import { defineProps } from "vue";
 import Swal from "@/plugins/swal";
 import planServiceApi from "../../api/plan";
+import { useUserStore } from "../../store";
+
+const userStore = useUserStore();
+
 const props = defineProps(["data"]);
+
 const purchasePlan = (data: any) => {
   Swal.fire({
     title: `Subscribe ${data.name} plan`,
@@ -35,6 +40,7 @@ const purchasePlan = (data: any) => {
     allowOutsideClick: () => !Swal.isLoading(),
   }).then((result: any) => {
     if (result.isConfirmed) {
+      userStore.get();
       Swal.fire({
         title: "Subscribed successfully!",
       });

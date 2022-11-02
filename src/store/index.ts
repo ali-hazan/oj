@@ -1,13 +1,19 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
+import { useStorage } from "@vueuse/core";
+import AuthServiceApi from "../api/auth";
 
-export const useCounterStore = defineStore('counter', {
-  state: () => ({ count: 0 }),
-  getters: {
-    double: state => state.count * 2,
-  },
+export const useUserStore = defineStore("user", {
+  state: () => ({ user: useStorage("user", {}) }),
   actions: {
-    increment() {
-      this.count++
+    get() {
+      AuthServiceApi.whoami().then((res) => {
+        this.user = res.data.data;
+      });
     },
   },
-})
+  getters: {
+    whoami(): any {
+      return this.user;
+    },
+  },
+});
