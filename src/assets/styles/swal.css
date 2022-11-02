@@ -279,7 +279,7 @@
     margin: 0;
     padding: 0.8em 1em 0;
     color: inherit;
-    font-size: 1.875em;
+    font-size: 1.2em;
     font-weight: 600;
     text-align: center;
     text-transform: none;
@@ -355,7 +355,7 @@
     background: initial;
     background-color: #6e7881;
     color: #fff;
-    font-size: 1em;
+    font-size: 0.8em;
   }
 
   .swal2-styled:focus {

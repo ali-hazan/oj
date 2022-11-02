@@ -3,14 +3,44 @@
     <h3>
       {{ data.name }}
     </h3>
-    <h4>{{ data.amount }} AED</h4>
-    <button class="purchase-btn">Purchase</button>
+    <h4>{{ data.price }} AED</h4>
+    {{ data.points }} Points
+    <p>{{ data.duration }} {{ data.duration_mode }}</p>
+    <button @click="purchasePlan(data)" class="purchase-btn">Purchase</button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { defineProps } from "vue";
+import Swal from "@/plugins/swal";
+import planServiceApi from "../../api/plan";
 const props = defineProps(["data"]);
+const purchasePlan = (data: any) => {
+  Swal.fire({
+    title: `Subscribe ${data.name} plan`,
+    showCancelButton: true,
+    confirmButtonText: "Purchase",
+    showLoaderOnConfirm: true,
+    preConfirm: () => {
+      return planServiceApi
+        .subscribe({ subscribed: data.id })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          const errorMsg = Object.values(error.response.data.error)[0];
+          Swal.showValidationMessage(`Request failed: ${errorMsg}`);
+        });
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result: any) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Subscribed successfully!",
+      });
+    }
+  });
+};
 </script>
 
 <style>

@@ -2,8 +2,9 @@
   <div>
     <h2 class="text-center text-white">Subscribe</h2>
     <div class="subscription-plan">
+
       <SubscriptionCard
-        v-for="item in subscirptionData"
+        v-for="item in plans"
         :key="item.id"
         :data="item"
       />
@@ -12,25 +13,12 @@
 </template>
 
 <script lang="ts" setup>
+import { toRefs } from "vue";
 import SubscriptionCard from "./SubscriptionCard.vue";
+// eslint-disable-next-line no-undef
+const props = defineProps(["plans"])
+const {plans} = toRefs(props)
 
-const subscirptionData = [
-  {
-    id: 1,
-    amount: 199,
-    name: "WEEKLY",
-  },
-  {
-    id: 2,
-    amount: 499,
-    name: "MONTHLY",
-  },
-  {
-    id: 3,
-    amount: 999,
-    name: "ANNUAL",
-  },
-];
 </script>
 
 <style>
