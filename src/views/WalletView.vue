@@ -2,7 +2,7 @@
   <div class="about">
     <LayoutDefault>
       <MyWallet />
-      <SubscriptionPlan :plans="plans" />
+      <SubscriptionPlan :plans="plans" style="margin-top:64px"/>
     </LayoutDefault>
   </div>
 </template>
